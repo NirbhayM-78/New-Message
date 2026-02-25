@@ -1,127 +1,247 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Private Access ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Forever ❤️</title>
+ 
 <style>
-body {
-  margin: 0;
-  background: black;
-  color: #00ffcc;
-  font-family: monospace;
-  overflow: hidden;
-  text-align: center;
+body{
+margin:0;
+background:black;
+overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+color:white;
+text-align:center;
 }
  
-#boot {
-  margin-top: 120px;
-  font-size: 18px;
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
  
-#loginBox {
-  display: none;
-  margin-top: 100px;
+.section{
+display:none;
+padding:40px;
+margin-top:80px;
 }
  
-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
+button{
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#ff4d6d;
+color:white;
+font-size:18px;
+cursor:pointer;
 }
  
-button {
-  padding: 10px 20px;
-  margin-top: 10px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
+input{
+padding:10px;
+font-size:18px;
+border-radius:10px;
+border:none;
 }
  
-#loveMessage {
-  display: none;
-  color: white;
-  margin-top: 80px;
-  font-size: 20px;
-  padding: 20px;
+img{
+max-width:250px;
+border-radius:20px;
+margin:10px;
 }
  
-.heart {
-  position: absolute;
-  color: red;
-  font-size: 20px;
-  animation: float 5s linear infinite;
+.heart{
+position:fixed;
+color:red;
+animation:float 5s linear forwards;
 }
  
-@keyframes float {
-  0% {transform: translateY(100vh);}
-  100% {transform: translateY(-10vh);}
+@keyframes float{
+to{transform:translateY(-100vh);opacity:0;}
+}
+ 
+@keyframes fall{
+to{transform:translateY(110vh) rotate(360deg);opacity:0.9;}
+}
+ 
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-10px);}
+50%{transform:translateX(10px);}
+75%{transform:translateX(-10px);}
+100%{transform:translateX(0);}
 }
 </style>
 </head>
  
 <body>
  
-<div id="boot">
-  <p>Booting HusbandOS v1.0...</p>
-  <p>Loading Memories...</p>
-  <p>Accessing Wife's Heart...</p>
+<canvas id="stars"></canvas>
+ 
+<div id="intro" class="section" style="display:block;margin-top:150px;">
+<h1>Welcome My Love ❤️</h1>
+<button onclick="showDate()">Start Our Story</button>
 </div>
  
-<div id="loginBox">
-  <h2>Enter Special Date 💍</h2>
-  <p>(Hint: Our Wedding Date DDMMYYYY)</p>
-  <input type="password" id="password">
-  <br>
-  <button onclick="checkPassword()">Unlock Love ❤️</button>
+<div id="dateSection" class="section">
+<h2>Enter Our Wedding Date 💍</h2>
+<p>(Format: DDMMYYYY)</p>
+<input type="password" id="dateInput">
+<br><br>
+<button onclick="checkDate()">Unlock Forever ❤️</button>
 </div>
  
-<div id="loveMessage">
-  <h1>Access Granted ❤️</h1>
-  <p>
-    My Love,<br><br>
-    From the day you became my wife,  
-    my life upgraded to Premium Version. 💎  
-    You are my peace in chaos,  
-    my strength in weakness,  
-    and my forever home.  
-    <br><br>
-    I promise to love you harder every single day.  
-    Forever yours,  
-    Your Husband ❤️
-  </p>
+<div id="message" class="section">
+<h2 id="typedText"></h2>
+<button onclick="showGallery()">Next ❤️</button>
 </div>
+ 
+<div id="gallery" class="section">
+<h2>Our Beautiful Memories 📸</h2>
+<img src="https://drive.google.com/file/d/1PyBOIeb4HbiFoJvlFd1c6StUNjLL8e5b/view?usp=drive_link">
+<img src="https://drive.google.com/file/d/1PyBOIeb4HbiFoJvlFd1c6StUNjLL8e5b/view?usp=drive_link">
+<img src="https://drive.google.com/file/d/1PyBOIeb4HbiFoJvlFd1c6StUNjLL8e5b/view?usp=drive_link">
+<br><br>
+<button onclick="showReasons()">Why I Love You ❤️</button>
+</div>
+ 
+<div id="reasons" class="section">
+<h2>
+❤️ You make my life brighter<br>
+❤️ You are my peace<br>
+❤️ You are my strength<br>
+❤️ You are my forever<br>
+</h2>
+<button onclick="finale()">Final Surprise 💍</button>
+</div>
+ 
+<div id="final" class="section">
+<h1>I Choose You. Always. ❤️</h1>
+<h2 id="countdown"></h2>
+</div>
+ 
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
  
 <script>
+ 
+function showDate(){
+document.getElementById("intro").style.display="none";
+document.getElementById("dateSection").style.display="block";
+}
+ 
+function checkDate(){
+var entered=document.getElementById("dateInput").value;
+ 
+if(entered==="10022026"){   // 👉 CHANGE THIS
+ 
+cinematicHearts();
+ 
 setTimeout(function(){
-  document.getElementById("boot").style.display = "none";
-  document.getElementById("loginBox").style.display = "block";
-}, 4000);
+document.getElementById("dateSection").style.display="none";
+document.getElementById("message").style.display="block";
+typeWriter("The day you became my wife was the day my life truly began ❤️");
+},3000);
  
-function checkPassword() {
-  var pass = document.getElementById("password").value;
-  if(pass === "10022026") {   // 👉 Yaha apni wedding date likh (example 14022025)
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("loveMessage").style.display = "block";
-    startHearts();
-  } else {
-    alert("Wrong Password 😜 Try Again My Love");
-  }
+}else{
+alert("Wrong Date 😜 Try Again My Love");
+}
 }
  
-function startHearts(){
-  setInterval(function(){
-    var heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
-  },300);
+function cinematicHearts(){
+document.body.style.animation="shake 0.5s";
+setTimeout(()=>document.body.style.animation="",500);
+ 
+for(let i=0;i<120;i++){
+let heart=document.createElement("div");
+heart.innerHTML="💖";
+heart.style.position="fixed";
+heart.style.top="-20px";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*30+20)+"px";
+heart.style.animation="fall 4s linear forwards";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),4000);
 }
+}
+ 
+function typeWriter(text){
+let i=0;
+let speed=50;
+function typing(){
+if(i<text.length){
+document.getElementById("typedText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
+typing();
+}
+ 
+function showGallery(){
+document.getElementById("message").style.display="none";
+document.getElementById("gallery").style.display="block";
+}
+ 
+function showReasons(){
+document.getElementById("gallery").style.display="none";
+document.getElementById("reasons").style.display="block";
+}
+ 
+function finale(){
+document.getElementById("reasons").style.display="none";
+document.getElementById("final").style.display="block";
+startFloatingHearts();
+countdown();
+}
+ 
+function startFloatingHearts(){
+setInterval(function(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+20)+"px";
+heart.style.bottom="-20px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},300);
+}
+ 
+function countdown(){
+var countDate=new Date("February 14, 2026").getTime(); // change anniversary date
+setInterval(function(){
+var now=new Date().getTime();
+var gap=countDate-now;
+var days=Math.floor(gap/(1000*60*60*24));
+document.getElementById("countdown").innerHTML=
+"Next Anniversary in "+days+" days 💍";
+},1000);
+}
+ 
+/* STAR BACKGROUND */
+var canvas=document.getElementById("stars");
+var ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+var stars=[];
+for(let i=0;i<200;i++){
+stars.push({x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+radius:Math.random()*1.5});
+}
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(star=>{
+ctx.beginPath();
+ctx.arc(star.x,star.y,star.radius,0,2*Math.PI);
+ctx.fill();
+});
+}
+setInterval(drawStars,50);
+ 
 </script>
  
 </body>
