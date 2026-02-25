@@ -1,14 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World (JK)</title>
+<title>Private Access ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: #00ffcc;
+  font-family: monospace;
+  overflow: hidden;
+  text-align: center;
+}
+ 
+#boot {
+  margin-top: 120px;
+  font-size: 18px;
+}
+ 
+#loginBox {
+  display: none;
+  margin-top: 100px;
+}
+ 
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+ 
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+ 
+#loveMessage {
+  display: none;
+  color: white;
+  margin-top: 80px;
+  font-size: 20px;
+  padding: 20px;
+}
+ 
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  animation: float 5s linear infinite;
+}
+ 
+@keyframes float {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-10vh);}
+}
+</style>
 </head>
+ 
 <body>
-    <h1>Hello, Bhosdiwaalo</h1>
-    <p>Jo me hu wo me hu tu tera dekh jhaatu.</p>
+ 
+<div id="boot">
+  <p>Booting HusbandOS v1.0...</p>
+  <p>Loading Memories...</p>
+  <p>Accessing Wife's Heart...</p>
+</div>
+ 
+<div id="loginBox">
+  <h2>Enter Special Date 💍</h2>
+  <p>(Hint: Our Wedding Date DDMMYYYY)</p>
+  <input type="password" id="password">
+  <br>
+  <button onclick="checkPassword()">Unlock Love ❤️</button>
+</div>
+ 
+<div id="loveMessage">
+  <h1>Access Granted ❤️</h1>
+  <p>
+    My Love,<br><br>
+    From the day you became my wife,  
+    my life upgraded to Premium Version. 💎  
+    You are my peace in chaos,  
+    my strength in weakness,  
+    and my forever home.  
+    <br><br>
+    I promise to love you harder every single day.  
+    Forever yours,  
+    Your Husband ❤️
+  </p>
+</div>
+ 
+<script>
+setTimeout(function(){
+  document.getElementById("boot").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+}, 4000);
+ 
+function checkPassword() {
+  var pass = document.getElementById("password").value;
+  if(pass === "10022026") {   // 👉 Yaha apni wedding date likh (example 14022025)
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("loveMessage").style.display = "block";
+    startHearts();
+  } else {
+    alert("Wrong Password 😜 Try Again My Love");
+  }
+}
+ 
+function startHearts(){
+  setInterval(function(){
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+}
+</script>
+ 
 </body>
-
 </html>
-
