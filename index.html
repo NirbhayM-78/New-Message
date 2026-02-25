@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Her Infinite Cinematic Universe ❤️</title>
+<title>Her Infinite Love Universe ❤️</title>
  
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
  
@@ -15,6 +15,7 @@ background:black;
 color:white;
 text-align:center;
 cursor:none;
+transition:background 2s;
 }
  
 canvas{
@@ -39,27 +40,14 @@ to{opacity:1; transform:translate(-50%,-50%) scale(1);}
 }
  
 button{
-padding:15px 35px;
+padding:15px 30px;
 border:none;
 border-radius:30px;
 background:linear-gradient(45deg,#ff0000,#ff9900);
 color:white;
 font-size:18px;
 cursor:pointer;
-box-shadow:0 0 20px red;
-transition:0.3s;
-}
- 
-button:hover{
-transform:scale(1.1);
-box-shadow:0 0 40px orange;
-}
- 
-input{
-padding:12px;
-font-size:18px;
-border-radius:10px;
-border:none;
+margin:10px;
 }
  
 .glow{
@@ -95,23 +83,9 @@ animation:floatUp 1s forwards;
 to{transform:translateY(-60px);opacity:0;}
 }
  
-@keyframes screenShake{
-0%{transform:translate(0,0);}
-25%{transform:translate(-10px,5px);}
-50%{transform:translate(10px,-5px);}
-75%{transform:translate(-10px,5px);}
-100%{transform:translate(0,0);}
-}
- 
-.flash{
-position:fixed;
-width:100%;
-height:100%;
-background:white;
-top:0;
-left:0;
-opacity:0;
-pointer-events:none;
+.bigEmoji{
+font-size:120px;
+animation:pulse 1.5s infinite;
 }
  
 </style>
@@ -120,10 +94,9 @@ pointer-events:none;
 <body>
  
 <canvas id="stars"></canvas>
-<div class="flash" id="flash"></div>
  
 <div id="intro" class="section" style="display:block;">
-<h1 class="glow">Welcome To Your Infinite Love Universe ❤️</h1>
+<h1 class="glow">Welcome To Your Love Universe ❤️</h1>
 <button onclick="showDate()">Enter</button>
 </div>
  
@@ -137,25 +110,27 @@ pointer-events:none;
 <div id="story" class="section">
 <h2 class="glow">16 May – 12:11 AM 💋</h2>
 <p>The First I Love You 🥺</p>
-<button onclick="hug()">Next</button>
-</div>
- 
-<div id="hugSection" class="section">
-<h2>First Hug 🫂</h2>
-<p id="beat">8:20 PM – Dosaram Mahalaxmi Nagar</p>
-<button onclick="finalScene()">Continue</button>
+<button onclick="finalScene()">Next</button>
 </div>
  
 <div id="finalScene" class="section">
 <h1 class="glow">Main Jhukega Nahi…</h1>
 <h2>Sirf Tumhare Pyaar Me ❤️</h2>
 <div class="ring">💍</div>
-<button onclick="proposal()">One Last Click</button>
+<br>
+<button onclick="proposal()">Continue</button>
 </div>
  
 <div id="proposal" class="section">
 <h1 class="glow">Will You Stay With Me Forever? 🥹</h1>
-<button onclick="celebrate()">YES ❤️</button>
+<button onclick="yesClicked()">YES ❤️</button>
+<button id="noBtn" onclick="noClicked()">NO 😏</button>
+<p id="noMessage"></p>
+</div>
+ 
+<div id="ending" class="section">
+<div class="bigEmoji">😌😏</div>
+<h1>motki bubu ❤️</h1>
 </div>
  
 <script>
@@ -166,7 +141,7 @@ const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 let stars=[];
-for(let i=0;i<300;i++){
+for(let i=0;i<250;i++){
 stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2});
 }
 function animateStars(){
@@ -191,81 +166,32 @@ document.getElementById("dateSection").style.display="block";
  
 function unlock(){
 if(document.getElementById("dateInput").value==="10022026"){
-cinematicImpact();
-realHeartBurst();
+startFallingHearts();
 setTimeout(()=>{
 document.getElementById("dateSection").style.display="none";
 document.getElementById("story").style.display="block";
-},2500);
+},2000);
 }else{
 alert("Wrong Date 😜");
 }
 }
  
-function cinematicImpact(){
-document.body.style.animation="screenShake 0.5s";
-setTimeout(()=>document.body.style.animation="",500);
- 
-let flash=document.getElementById("flash");
-flash.style.opacity="0.8";
-setTimeout(()=>flash.style.opacity="0",200);
-}
- 
-function realHeartBurst(){
- 
-let centerX=window.innerWidth/2;
-let centerY=window.innerHeight/2;
- 
-for(let i=0;i<150;i++){
+function startFallingHearts(){
+setInterval(function(){
 let heart=document.createElement("div");
 heart.innerHTML="❤️";
 heart.style.position="fixed";
-heart.style.left=centerX+"px";
-heart.style.top=centerY+"px";
-heart.style.fontSize=(Math.random()*25+20)+"px";
- 
-let angle=Math.random()*2*Math.PI;
-let velocity=Math.random()*8+4;
-let gravity=0.2;
-let vx=Math.cos(angle)*velocity;
-let vy=Math.sin(angle)*velocity;
- 
+heart.style.left=Math.random()*100+"vw";
+heart.style.top="-20px";
+heart.style.fontSize=(Math.random()*30+20)+"px";
+heart.style.animation="falling 6s linear forwards";
 document.body.appendChild(heart);
- 
-function animate(){
-vy+=gravity;
-centerX+=vx;
-centerY+=vy;
- 
-heart.style.left=centerX+"px";
-heart.style.top=centerY+"px";
- 
-if(centerY>window.innerHeight){
-vy*=-0.6;
-centerY=window.innerHeight;
-}
- 
-heart.style.opacity-=0.01;
- 
-if(heart.style.opacity<=0){
-heart.remove();
-}else{
-requestAnimationFrame(animate);
-}
-}
-heart.style.opacity=1;
-animate();
-}
-}
- 
-function hug(){
-document.getElementById("story").style.display="none";
-document.getElementById("hugSection").style.display="block";
-document.getElementById("beat").style.animation="pulse 1s infinite";
+setTimeout(()=>heart.remove(),6000);
+},300);
 }
  
 function finalScene(){
-document.getElementById("hugSection").style.display="none";
+document.getElementById("story").style.display="none";
 document.getElementById("finalScene").style.display="block";
 }
  
@@ -274,21 +200,38 @@ document.getElementById("finalScene").style.display="none";
 document.getElementById("proposal").style.display="block";
 }
  
-function celebrate(){
-for(let i=0;i<300;i++){
-let conf=document.createElement("div");
-conf.innerHTML="✨❤️💋";
-conf.style.position="fixed";
-conf.style.left=Math.random()*100+"vw";
-conf.style.top="-10px";
-conf.style.fontSize="25px";
-conf.style.animation="floatUp 3s forwards";
-document.body.appendChild(conf);
-setTimeout(()=>conf.remove(),3000);
+let noCount=0;
+ 
+function noClicked(){
+noCount++;
+let msg=document.getElementById("noMessage");
+ 
+if(noCount===1){
+msg.innerHTML="Koi aur option nahi hai 😌";
+}
+else if(noCount===2){
+msg.innerHTML="Pleaseeeeeeee 🥺";
+}
+else if(noCount===3){
+msg.innerHTML="Ab to shaadi bhi ho chuki hai 😏";
+}
+else if(noCount===4){
+msg.innerHTML="KARNA HI PADEGA 😂";
+document.getElementById("noBtn").style.display="none";
 }
 }
  
-/* CURSOR HEART TRAIL */
+function yesClicked(){
+document.getElementById("proposal").style.display="none";
+document.getElementById("ending").style.display="block";
+ 
+setTimeout(()=>{
+document.body.style.background="black";
+document.body.style.transition="3s";
+},2000);
+}
+ 
+/* Cursor heart trail */
 document.addEventListener("mousemove",function(e){
 let heart=document.createElement("div");
 heart.className="cursorHeart";
@@ -304,6 +247,12 @@ document.documentElement.requestFullscreen();
 });
  
 </script>
+ 
+<style>
+@keyframes falling{
+to{transform:translateY(110vh);opacity:0;}
+}
+</style>
  
 </body>
 </html>
